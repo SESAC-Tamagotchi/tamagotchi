@@ -3,12 +3,11 @@ package pet;
 public abstract class Pet {
 
     /* 초기 세팅
-    * getter & setter 필요에 따라 추가 */
+     * getter & setter 필요에 따라 추가 */
 
     // 공통 속성
     private String name;
-    private int age;
-    private int health; // 체력
+    private int hp; // 체력
     private int happiness;
     private int hunger;
     private int cleanliness;
@@ -16,25 +15,147 @@ public abstract class Pet {
 
     public Pet(String name) {
         this.name = name;
-        this.age = 0;
-        this.health = 100;
+        this.hp = 100;
         this.happiness = 50;
         this.hunger = 0;
         this.cleanliness = 100;
         this.affection = 0;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public int getHp() {
+        return hp;
+    }
+
+    public int getHunger() {
+        return hunger;
+    }
+
+    public int getCleanliness() {
+        return cleanliness;
+    }
+
+    public int getAffection() {
+        return affection;
+    }
+
+    public int getHappiness() {
+        return happiness;
+    }
+
+    public void setHappiness(int happiness) {
+        this.happiness = limitNumber(happiness);
+    }
+
     // 공통 기능
-    public void eat(){}
-    public void walk(){}
-    public void play(){}
-    public void clean(){}
-    public void sleep(){}
-    public void getInfo(){}
+    public boolean eat() {
+
+        if (hunger <= 10) {
+            System.out.println(name + "은(는) 배가 불러서 밥을 먹지 않아요!");
+            return false;
+        }
+        // 과식 처리
+        if (hunger <= 30) {
+            hp -= 10;
+            hunger -= 10;
+            System.out.println("너무 배불러서 과식했어요!");
+            checkStatus();
+            return true;
+        }
+        System.out.println(name + "이(가) 밥을 맛있게 먹어요!");
+        hunger -= 10;
+        hp += 5;
+        happiness += 5;
+        checkStatus();
+        return true;
+    }
+
+    public boolean walk() {
+        if (hp <= 20) {
+            System.out.println(name + "은(는) 너무 지쳐서 산책할 수 없어요!");
+            return false;
+        }
+        System.out.println(name + "이(가) 산책을 갑니다!");
+        hunger += 15;
+        happiness += 15;
+        hp -= 15;
+        affection += 5;
+        cleanliness -= 10;
+        checkStatus();
+        return true;
+    }
+
+    public boolean play() {
+        if (hp <= 20) {
+            System.out.println(name + "은(는) 너무 지쳐서 놀 수 없어요!");
+            return false;
+        }
+        System.out.println(name + "이(가) 신나게 놀아요!");
+        affection += 15;
+        hunger += 10;
+        happiness += 15;
+        hp -= 5;
+        cleanliness -= 5;
+        checkStatus();
+        return true;
+    }
+
+    public void clean() {
+        System.out.println(name + "이(가) 씻어요!");
+        cleanliness += 20;
+        happiness -= 5;
+        hp -= 5;
+        checkStatus();
+    }
+
+    public void sleep() {
+        System.out.println(name + "이(가) 잠에 듭니다!");
+        hp += 20;
+        hunger += 15;
+        happiness += 10;
+        checkStatus();
+        System.out.println("Zzzzz...");
+    }
+
+    // 시간 관련
+    public void passTime() {
+        hunger += 5;
+        happiness -= 3;
+        cleanliness -= 5;
+
+        checkStatus();
+    }
+
+    public void getInfo() {
+        System.out.println("========== 펫 상태 ==========");
+        System.out.println("이름: " + name);
+        System.out.println("체력: " + hp);
+        System.out.println("행복도: " + happiness);
+        System.out.println("배고픔: " + hunger);
+        System.out.println("청결도: " + cleanliness);
+        System.out.println("친밀도: " + affection);
+        System.out.println("============================");
+    }
 
     // 펫 고유 기능
     public abstract void makeSound();
+
     public abstract void specialAction();
 
+    // pet 상태값 리밋 체크
+    // 지정 최소/최대값 범위를 벗어나지 않도록 하기 위함
+    private void checkStatus() {
+        hunger = limitNumber(hunger);
+        hp = limitNumber(hp);
+        happiness = limitNumber(happiness);
+        cleanliness = limitNumber(cleanliness);
+        affection = limitNumber(affection);
+    }
 
+    private int limitNumber(int value){
+        return Math.max(0, Math.min(100, value));
+    }
 }
