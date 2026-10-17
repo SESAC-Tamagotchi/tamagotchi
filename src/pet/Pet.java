@@ -16,7 +16,7 @@ public abstract class Pet {
     public Pet(String name) {
         this.name = name;
         this.hp = 100;
-        this.happiness = 50;
+        this.happiness = 80;
         this.hunger = 0;
         this.cleanliness = 100;
         this.affection = 0;
@@ -54,6 +54,8 @@ public abstract class Pet {
     public boolean eat() {
 
         if (hunger <= 10) {
+            showUnhappyImage();
+            affection -= 5;
             System.out.println(name + "은(는) 배가 불러서 밥을 먹지 않아요!");
             return false;
         }
@@ -61,23 +63,29 @@ public abstract class Pet {
         if (hunger <= 30) {
             hp -= 10;
             hunger -= 10;
+            affection -= 5;
+            happiness -= 10;
+            showUnhappyImage();
             System.out.println("너무 배불러서 과식했어요!");
             checkStatus();
             return true;
         }
+        showHappyImage();
         System.out.println(name + "이(가) 밥을 맛있게 먹어요!");
-        hunger -= 10;
+        hunger -= 25;
         hp += 5;
-        happiness += 5;
+        happiness += 10;
         checkStatus();
         return true;
     }
 
     public boolean walk() {
         if (hp <= 20) {
+            showUnhappyImage();
             System.out.println(name + "은(는) 너무 지쳐서 산책할 수 없어요!");
             return false;
         }
+        showHappyImage();
         System.out.println(name + "이(가) 산책을 갑니다!");
         hunger += 15;
         happiness += 15;
@@ -90,13 +98,15 @@ public abstract class Pet {
 
     public boolean play() {
         if (hp <= 20) {
+            showUnhappyImage();
             System.out.println(name + "은(는) 너무 지쳐서 놀 수 없어요!");
             return false;
         }
+        showHappyImage();
         System.out.println(name + "이(가) 신나게 놀아요!");
-        affection += 15;
+        affection += 10;
         hunger += 10;
-        happiness += 15;
+        happiness += 20;
         hp -= 5;
         cleanliness -= 5;
         checkStatus();
@@ -104,10 +114,10 @@ public abstract class Pet {
     }
 
     public void clean() {
+        showHappyImage();
         System.out.println(name + "이(가) 씻어요!");
         cleanliness += 20;
-        happiness -= 5;
-        hp -= 5;
+        happiness += 5;
         checkStatus();
     }
 
@@ -115,7 +125,7 @@ public abstract class Pet {
         System.out.println(name + "이(가) 잠에 듭니다!");
         hp += 20;
         hunger += 15;
-        happiness += 10;
+        happiness += 15;
         checkStatus();
         System.out.println("Zzzzz...");
     }
@@ -126,7 +136,14 @@ public abstract class Pet {
         happiness -= 3;
         cleanliness -= 5;
 
+        System.out.println("시간이 흐르고 있습니다...");
         checkStatus();
+    }
+
+    // 진화 점수 (게임 엔딩시 점수 계산)
+    // 진화된 펫 클래스에서 오버라이딩해서 점수 리턴
+    public int getEvolutionBonus(){
+        return 0;
     }
 
     public void getInfo() {
@@ -142,8 +159,10 @@ public abstract class Pet {
 
     // 펫 고유 기능
     public abstract void makeSound();
-
     public abstract void specialAction();
+    public abstract void showHappyImage();
+    public abstract void showUnhappyImage();
+
 
     // pet 상태값 리밋 체크
     // 지정 최소/최대값 범위를 벗어나지 않도록 하기 위함

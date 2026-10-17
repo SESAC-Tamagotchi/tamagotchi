@@ -19,6 +19,11 @@ public class Dog extends Pet{
     }
 
     @Override
+    public int getEvolutionBonus(){
+        return 10;
+    }
+
+    @Override
     public void passTime(){
         super.passTime();
         setHappiness(getHappiness() - 7);
@@ -36,6 +41,20 @@ public class Dog extends Pet{
 
     public void specialDog(){
         System.out.println("*****test*****");
+    }
+
+    public void showHappyImage() {
+        System.out.println(" / \\__");
+        System.out.println("( ^  ^ )");
+        System.out.println(" /     \\");
+        System.out.println("/_______\\");
+    }
+
+    public void showUnhappyImage() {
+        System.out.println(" / \\__");
+        System.out.println("( -  - )");
+        System.out.println(" /     \\");
+        System.out.println("/_______\\");
     }
 
 
