@@ -38,10 +38,10 @@ public class GameManager {
                     System.out.println("게임을 종료합니다.");
                     return;
                 }
-                if(petAction(choice)){
-                    pet.passTime();
-                }
 
+                petAction(choice);
+                pet.passTime();
+                checkWarning();
                 checkGameOver();
 
                 if (gameOver) {
@@ -49,14 +49,19 @@ public class GameManager {
                     System.out.println("게임을 종료합니다.");
                     return;
                 }
-                checkWarning();
+
             }
 
-            day += 1;
-
-            if(!gameOver && day > maxDays){
+            if(!gameOver && day == maxDays){
                 showEnding();
                 return;
+            }
+            day++;
+
+            if(day == 3 || day == 7){
+                pet = pet.evolve(day);
+                pet.showHappyImage();
+                pet.makeSound();
             }
             }
         }
@@ -77,13 +82,13 @@ public class GameManager {
     // 사용자 입력
     private int getChoice(){
         while(true){
-            String input = sc.next();
+            String input = sc.next().trim();
             try {
                 int choice = Integer.parseInt(input);
                 if(choice >= 0 && choice <= 6){
                     return choice;
                 }else{
-                    System.out.print("0~6 사이의 메뉴 숫자를 입력해주세요");
+                    System.out.print("0~6 사이의 메뉴 숫자를 입력해주세요: ");
                 }
             } catch (NumberFormatException e) {
                 System.out.print("메뉴 숫자를 입력해주세요: ");
@@ -153,8 +158,9 @@ public class GameManager {
 
     // 게임 엔딩
     private void showEnding(){
-        System.out.println("\n===== 축하합니다! =====");
-        System.out.println(pet.getName() + "와(과)"+ maxDays + "일을 함께 보냈어요!");
+        System.out.println("===== 축하합니다! =====");
+        System.out.println(pet.getName() + "와(과) "+ maxDays + "일을 함께 보냈어요!");
+        pet.showHappyImage();
         pet.getInfo();
 
         // 상태 점수 계산
