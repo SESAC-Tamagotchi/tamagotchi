@@ -6,6 +6,40 @@ public class Dragon extends Pet{
         super(name);
     }
 
+    // 진화용 생성자
+    protected Dragon(Dragon base){
+        super(base);
+    }
+
+    // 진화 시점의 가장 높은 상태값에 따라 진화 형태 결정
+    // 행복도 → 불꽃 드래곤, 청결도 → 얼음 드래곤, 체력 → 강철 드래곤
+    @Override
+    public Pet evolve(){
+        System.out.println("어라...? " + getName() + "의 몸이 빛나기 시작해요! ✨");
+
+        int happiness = getHappiness();
+        int cleanliness = getCleanliness();
+        int hp = getHp();
+
+        Dragon evolved;
+        String evolvedName;
+        if(happiness >= cleanliness && happiness >= hp){
+            evolved = new FireDragon(this);
+            evolvedName = "불꽃 드래곤";
+        } else if(cleanliness >= hp){
+            evolved = new IceDragon(this);
+            evolvedName = "얼음 드래곤";
+        } else {
+            evolved = new SteelDragon(this);
+            evolvedName = "강철 드래곤";
+        }
+
+        evolved.showHappyImage();
+        evolved.makeSound();
+        System.out.println(getName() + "이(가) " + evolvedName + "(으)로 진화했어요!");
+        return evolved;
+    }
+
     @Override
     public boolean play(){
         boolean isSuccess = super.play();
@@ -41,29 +75,25 @@ public class Dragon extends Pet{
     }
 
     public void showHappyImage() {
-        System.out.println("                       /\\ /\\");
-        System.out.println("        /\\            / \\\\ \\_____");
-        System.out.println("       /  \\__        |  (@)      >");
-        System.out.println("      / /\\   \\__     |      __VVVV  ~🔥🔥");
-        System.out.println("     /_/  \\_____\\__  |     /");
-        System.out.println("         /\\/\\/\\/\\/\\/\\|     \\__^^^^>");
-        System.out.println("        /               _______/");
-        System.out.println("  <>___/   _________   /");
-        System.out.println("          /_/\\    /_/\\/");
-        System.out.println("          VVV     VVV");
+        System.out.println("            /\\ /\\");
+        System.out.println("     /\\    / \\\\ \\___");
+        System.out.println("    /  \\_ |  (@)   >");
+        System.out.println("   /_/\\__\\|    _VV");
+        System.out.println("      /\\/\\|    \\_^^>");
+        System.out.println("  <>__/    ____/");
+        System.out.println("       /_/\\ /_/\\");
+        System.out.println("       VV   VV");
     }
 
     public void showUnhappyImage() {
-        System.out.println("                       /\\ /\\   ~");
-        System.out.println("        /\\            / \\\\ \\_____~");
-        System.out.println("       /  \\__        |  (-)      >");
-        System.out.println("      / /\\   \\__     |      __VVVV|");
-        System.out.println("     /_/  \\_____\\__  |     /  ^^^^|");
-        System.out.println("         /\\/\\/\\/\\/\\/\\|     \\______/");
-        System.out.println("        /               /");
-        System.out.println("  <>___/   _________   /");
-        System.out.println("          /_/\\    /_/\\/");
-        System.out.println("          VVV     VVV");
+        System.out.println("            /\\ /\\  ~");
+        System.out.println("     /\\    / \\\\ \\___~");
+        System.out.println("    /  \\_ |  (-)   >");
+        System.out.println("   /_/\\__\\|    _VV|");
+        System.out.println("      /\\/\\|    \\__/");
+        System.out.println("  <>__/    ____/");
+        System.out.println("       /_/\\ /_/\\");
+        System.out.println("       VV   VV");
     }
 
 }

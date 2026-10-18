@@ -22,6 +22,16 @@ public abstract class Pet {
         this.affection = 0;
     }
 
+    // 진화용 생성자: 진화 전 펫의 상태를 그대로 이어받음
+    protected Pet(Pet other) {
+        this.name = other.name;
+        this.hp = other.hp;
+        this.happiness = other.happiness;
+        this.hunger = other.hunger;
+        this.cleanliness = other.cleanliness;
+        this.affection = other.affection;
+    }
+
     public String getName() {
         return name;
     }
@@ -144,6 +154,12 @@ public abstract class Pet {
     // 진화된 펫 클래스에서 오버라이딩해서 점수 리턴
     public int getEvolutionBonus(){
         return 0;
+    }
+
+    // 진화 (진화하는 펫 클래스에서 오버라이딩해서 진화된 객체 리턴)
+    // 기본은 진화하지 않으므로 자기 자신을 리턴
+    public Pet evolve(){
+        return this;
     }
 
     public void getInfo() {

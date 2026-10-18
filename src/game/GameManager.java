@@ -11,6 +11,7 @@ public class GameManager {
     private Scanner sc = new Scanner(System.in);
     private int maxAction = 4;
     private int maxDays = 10;
+    private int evolutionDay = 5;
     private boolean gameOver = false;
 
     public GameManager(Pet pet) {
@@ -27,6 +28,12 @@ public class GameManager {
         while (!gameOver && day <= maxDays){
             System.out.println("==============="+day+"일차=================");
             System.out.println("새로운 하루가 시작되었습니다!");
+
+            // 진화: 진화하지 않는 펫은 자기 자신이 그대로 리턴됨
+            if(day == evolutionDay){
+                pet = pet.evolve();
+            }
+
             pet.getInfo();
 
             // 하루 행동 제한
