@@ -19,6 +19,9 @@ public class Egg extends Pet {
     private int cleanCount;
     private int sleepCount;
 
+    // 부화 실패 여부 (밥만 줘서 기록된 행동이 없으면 부화하지 못함)
+    private boolean hatchFailed;
+
     public Egg(String name){
         super(name);
     }
@@ -68,6 +71,15 @@ public class Egg extends Pet {
         if(day != HATCH_DAY){
             return this;
         }
+        if(walkCount + playCount + cleanCount + sleepCount == 0){
+            hatchFailed = true;
+            showUnhappyImage();
+            System.out.println("===== 엔딩: 깨어나지 못한 알 =====");
+            System.out.println(getName() + "은(는) 끝내 알에서 깨어나지 못했어요...");
+            System.out.println("알에게는 밥보다 따뜻한 손길이 필요했나 봐요.");
+            return this;
+        }
+
         System.out.println("알에 금이 가기 시작해요... 쩌적!");
 
         boolean walkMost = walkCount > playCount
@@ -78,6 +90,10 @@ public class Egg extends Pet {
         }
         System.out.println(getName() + "이(가) 드래곤으로 태어났어요!");
         return new Dragon(this);
+    }
+
+    public boolean isHatchFailed(){
+        return hatchFailed;
     }
 
     private void wobble(){
