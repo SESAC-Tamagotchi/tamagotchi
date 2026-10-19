@@ -11,10 +11,13 @@ public class Dragon extends Pet{
         super(base);
     }
 
-    // 진화 시점의 가장 높은 상태값에 따라 진화 형태 결정
+    // 5일차에 진화, 진화 시점의 가장 높은 상태값에 따라 진화 형태 결정
     // 행복도 → 불꽃 드래곤, 청결도 → 얼음 드래곤, 체력 → 강철 드래곤
     @Override
-    public Pet evolve(){
+    public Pet evolve(int day){
+        if(day != 5){
+            return this;
+        }
         System.out.println("어라...? " + getName() + "의 몸이 빛나기 시작해요! ✨");
 
         int happiness = getHappiness();
@@ -34,8 +37,6 @@ public class Dragon extends Pet{
             evolvedName = "강철 드래곤";
         }
 
-        evolved.showHappyImage();
-        evolved.makeSound();
         System.out.println(getName() + "이(가) " + evolvedName + "(으)로 진화했어요!");
         return evolved;
     }
