@@ -39,10 +39,6 @@ public class Main {
         }
 
         System.out.println("안녕 " + name + "!");
-//        if (pet instanceof Dog) {
-//            ((Dog) pet).specialDog();
-//        }
-
         GameManager gameManager = new GameManager(pet);
 
         // 게임 시작

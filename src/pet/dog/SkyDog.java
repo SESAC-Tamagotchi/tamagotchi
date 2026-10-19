@@ -15,7 +15,7 @@ public class SkyDog extends FlyDog {
 
     @Override
     public void specialAction(){
-        System.out.println(getName() + "이(가) 구름에서 휴식해요!");
+        System.out.println("🌥️🌥️" + getName() + "이(가) 구름 위에서 휴식해요!🌥️🌥️");
         setHappiness(getHappiness()+10);
         setHp(getHp() + 10);
         System.out.println("행복도/체력 +10 보너스를 얻었어요!");

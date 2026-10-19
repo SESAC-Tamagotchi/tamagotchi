@@ -37,17 +37,13 @@ public class Dog extends Pet {
 
     @Override
     public void makeSound(){
-        System.out.println("멍멍 왈왈!");
+        System.out.println("🐶멍멍 왈왈!🐶");
     }
 
     @Override
     public void specialAction(){
-        System.out.println(getName() + "이(가) 꼬리를 흔들며 뛰어요!");
+        System.out.println("🐶"+getName() + "이(가) 꼬리를 흔들며 뛰어요!🐕🐕");
     }
-
-//    public void specialDog(){
-//        System.out.println("*****test*****");
-//    }
 
     public void showHappyImage() {
         System.out.println(" / \\__");
@@ -66,9 +62,9 @@ public class Dog extends Pet {
     // 펫 진화
     @Override
     public Pet evolve(int day){
-        if(day == 3){
+        if(day == 4){
             System.out.println("===== 축하합니다! =====");
-            System.out.println(getName()+ "(이)가 날개를 얻었어요!");
+            System.out.println(getName()+ "(이)가 날개를 얻었어요!🪽🪽");
             return new FlyDog(this);
         }
         return this;
