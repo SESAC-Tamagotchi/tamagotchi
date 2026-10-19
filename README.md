@@ -154,6 +154,46 @@
 
 펫은 추상 클래스 `Pet`을 상속하고, 진화 형태는 진화 전 클래스를 다시 상속합니다. 그래서 상속 구조가 곧 진화 트리입니다(4장).
 
+### 파일 구조
+
+```
+tamagotchi/
+├── README.md
+├── tamagotchi.iml
+└── src/
+    ├── Main/
+    │   └── Main.java              # 진입점: 이름·펫 선택 후 게임 시작
+    ├── game/
+    │   └── GameManager.java       # 하루 진행, 메뉴, 진화 호출, 엔딩
+    └── pet/
+        ├── Pet.java               # 추상 부모 클래스: 공통 수치·행동
+        ├── egg/
+        │   └── Egg.java           # 알 (2일차 부화)
+        ├── dog/
+        │   ├── Dog.java           # 강아지
+        │   ├── FlyDog.java        # 날개 강아지 (extends Dog)
+        │   └── SkyDog.java        # 하늘의 마법사 (extends FlyDog)
+        └── dragon/
+            ├── Dragon.java        # 드래곤
+            ├── FireDragon.java    # 불꽃 드래곤 (extends Dragon)
+            ├── IceDragon.java     # 얼음 드래곤 (extends Dragon)
+            └── SteelDragon.java   # 강철 드래곤 (extends Dragon)
+```
+
+### 상속 구조
+
+```
+                    Pet (abstract)
+        ┌────────────┼──────────────┐
+       Egg          Dog           Dragon
+                     │       ┌──────┼───────┐
+                   FlyDog  Fire    Ice    Steel
+                     │     Dragon  Dragon  Dragon
+                   SkyDog
+```
+
+### 패키지별 역할
+
 | 패키지 | 클래스 | 역할 |
 | --- | --- | --- |
 | `Main` | `Main` | 이름·펫 종류 입력, `GameManager` 시작 |
