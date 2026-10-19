@@ -1,6 +1,7 @@
 package Main;
 
 import game.GameManager;
+import pet.dragon.Dragon;
 import pet.dog.Dog;
 import pet.Pet;
 
@@ -9,12 +10,12 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
 
+        // 다형성: 부모 타입(Pet)으로 자식 객체를 참조
         Pet pet;
         Scanner sc = new Scanner(System.in);
-        // Dog Test
         System.out.print("펫의 이름은 무엇인가요?: ");
         String name = sc.nextLine().trim();
-        System.out.println("펫의 종류를 선택하세요: 1. 강아지 2. 고양이");
+        System.out.println("펫의 종류를 선택하세요: 1. 강아지 2. 드래곤 3. 고양이");
         while (true){
             String input = sc.next().trim();
             try {
@@ -23,6 +24,9 @@ public class Main {
                     pet = new Dog(name);
                     break;
                 } else if (choice == 2) {
+                    pet = new Dragon(name);
+                    break;
+                } else if (choice == 3) {
                     System.out.println("고양이 구현시 추가");
                     return;
                 } else{
