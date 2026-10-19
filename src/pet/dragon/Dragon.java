@@ -1,4 +1,6 @@
-package pet;
+package pet.dragon;
+
+import pet.Pet;
 
 public class Dragon extends Pet{
 
