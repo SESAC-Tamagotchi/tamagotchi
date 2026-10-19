@@ -22,6 +22,7 @@ public abstract class Pet {
         this.affection = 0;
     }
 
+<<<<<<< HEAD
     // 진화용 생성자: 진화 전 펫의 상태를 그대로 이어받음
     protected Pet(Pet other) {
         this.name = other.name;
@@ -30,6 +31,16 @@ public abstract class Pet {
         this.hunger = other.hunger;
         this.cleanliness = other.cleanliness;
         this.affection = other.affection;
+=======
+    // 진화시 이전 펫의 상태를 이어서 받아오기 위한 복사 생성자
+    public Pet(Pet prev){
+        this.name = prev.name;
+        this.hp = prev.hp;
+        this.happiness = prev.happiness;
+        this.hunger = prev.hunger;
+        this.cleanliness = prev.cleanliness;
+        this.affection = prev.affection;
+>>>>>>> origin/main
     }
 
     public String getName() {
@@ -60,12 +71,18 @@ public abstract class Pet {
         this.happiness = limitNumber(happiness);
     }
 
+    public void setHp(int hp) {
+        this.hp = limitNumber(hp);
+    }
+
+
     // 공통 기능
     public boolean eat() {
 
         if (hunger <= 10) {
             showUnhappyImage();
             affection -= 5;
+            checkStatus();
             System.out.println(name + "은(는) 배가 불러서 밥을 먹지 않아요!");
             return false;
         }
@@ -192,5 +209,10 @@ public abstract class Pet {
 
     private int limitNumber(int value){
         return Math.max(0, Math.min(100, value));
+    }
+
+    // 펫 진화
+    public Pet evolve(int day){
+        return this;
     }
 }
