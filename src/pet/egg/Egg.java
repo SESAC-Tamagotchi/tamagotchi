@@ -6,14 +6,14 @@ import pet.dragon.Dragon;
 
 // 알: 어떤 행동에도 수치가 변하지 않고, 행동 횟수만 기록
 // 부화하는 날 가장 많이 한 행동에 따라 강아지 또는 드래곤이 태어남
+// 밥은 먹을 수 없어 거부함
 public class Egg extends Pet {
 
     // 부화하는 날 (이 날 아침에 부화)
     // 강아지의 3일차 진화와 겹치지 않도록 2일차에 부화
     private static final int HATCH_DAY = 2;
 
-    // 행동 횟수
-    private int eatCount;
+    // 행동 횟수 (밥은 먹을 수 없으므로 기록하지 않음)
     private int walkCount;
     private int playCount;
     private int cleanCount;
@@ -23,11 +23,11 @@ public class Egg extends Pet {
         super(name);
     }
 
+    // 알은 밥을 먹을 수 없음 (행동 횟수는 소모됨)
     @Override
     public boolean eat(){
-        eatCount++;
-        wobble();
-        return true;
+        System.out.println("알은 아직 밥을 먹을 수 없어요!");
+        return false;
     }
 
     @Override
@@ -62,7 +62,7 @@ public class Egg extends Pet {
         System.out.println("시간이 흐르고 있습니다...");
     }
 
-    // 산책을 가장 많이 했으면 강아지, 그 외(밥, 놀이 위주)는 드래곤
+    // 산책을 가장 많이 했으면 강아지, 그 외(놀이 위주)는 드래곤
     @Override
     public Pet evolve(int day){
         if(day != HATCH_DAY){
@@ -70,7 +70,7 @@ public class Egg extends Pet {
         }
         System.out.println("알에 금이 가기 시작해요... 쩌적!");
 
-        boolean walkMost = walkCount > eatCount && walkCount > playCount
+        boolean walkMost = walkCount > playCount
                 && walkCount > cleanCount && walkCount > sleepCount;
         if(walkMost){
             System.out.println(getName() + "이(가) 강아지로 태어났어요!");
