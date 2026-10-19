@@ -10,7 +10,7 @@ import pet.dragon.Dragon;
 public class Egg extends Pet {
 
     // 부화하는 날 (이 날 아침에 부화)
-    // 강아지의 3일차 진화와 겹치지 않도록 2일차에 부화
+    // 강아지의 진화와 겹치지 않도록 2일차에 부화
     private static final int HATCH_DAY = 2;
 
     // 행동 횟수 (밥은 먹을 수 없으므로 기록하지 않음)

@@ -15,7 +15,7 @@ public class FlyDog extends Dog {
 
     @Override
     public void specialAction(){
-        System.out.println(getName() + "이(가) 하늘을 날아요! 두둥실");
+        System.out.println("🪽🪽"+getName() + "이(가) 하늘을 날아요! 두둥실🪽🪽");
         setHappiness(getHappiness()+10);
         System.out.println("행복도 +10 보너스를 얻었어요!");
     }
@@ -39,9 +39,9 @@ public class FlyDog extends Dog {
     // 펫 진화
     @Override
     public Pet evolve(int day){
-        if(day == 7){
+        if(day == 8){
             System.out.println("===== 축하합니다! =====");
-            System.out.println(getName()+ "(이)가 하늘의 마법사로 진화했어요!");
+            System.out.println("🌥️🌥️"+ getName()+ "(이)가 하늘의 마법사로 진화했어요!🌥️🌥️");
             return new SkyDog(this);
         }
         return this;
