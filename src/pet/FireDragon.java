@@ -9,7 +9,7 @@ public class FireDragon extends Dragon{
 
     // 이미 진화한 상태이므로 더 이상 진화하지 않음
     @Override
-    public Pet evolve(){
+    public Pet evolve(int day){
         return this;
     }
 

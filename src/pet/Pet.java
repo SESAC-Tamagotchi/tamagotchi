@@ -22,25 +22,14 @@ public abstract class Pet {
         this.affection = 0;
     }
 
-<<<<<<< HEAD
-    // 진화용 생성자: 진화 전 펫의 상태를 그대로 이어받음
-    protected Pet(Pet other) {
-        this.name = other.name;
-        this.hp = other.hp;
-        this.happiness = other.happiness;
-        this.hunger = other.hunger;
-        this.cleanliness = other.cleanliness;
-        this.affection = other.affection;
-=======
     // 진화시 이전 펫의 상태를 이어서 받아오기 위한 복사 생성자
-    public Pet(Pet prev){
+    protected Pet(Pet prev){
         this.name = prev.name;
         this.hp = prev.hp;
         this.happiness = prev.happiness;
         this.hunger = prev.hunger;
         this.cleanliness = prev.cleanliness;
         this.affection = prev.affection;
->>>>>>> origin/main
     }
 
     public String getName() {
@@ -173,12 +162,6 @@ public abstract class Pet {
         return 0;
     }
 
-    // 진화 (진화하는 펫 클래스에서 오버라이딩해서 진화된 객체 리턴)
-    // 기본은 진화하지 않으므로 자기 자신을 리턴
-    public Pet evolve(){
-        return this;
-    }
-
     public void getInfo() {
         System.out.println("========== 펫 상태 ==========");
         System.out.println("이름: " + name);
@@ -211,7 +194,9 @@ public abstract class Pet {
         return Math.max(0, Math.min(100, value));
     }
 
-    // 펫 진화
+    // 펫 진화 (매일 아침 호출됨)
+    // 진화하는 펫 클래스에서 오버라이딩해서 진화 조건을 만족하면 진화된 객체 리턴
+    // 기본은 진화하지 않으므로 자기 자신을 리턴
     public Pet evolve(int day){
         return this;
     }
