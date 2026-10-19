@@ -8,9 +8,9 @@ public class Dragon extends Pet{
         super(name);
     }
 
-    // 진화용 생성자
-    protected Dragon(Dragon base){
-        super(base);
+    // 진화용 생성자 (알에서 부화할 때도 사용)
+    public Dragon(Pet prev){
+        super(prev);
     }
 
     // 5일차에 진화, 진화 시점의 가장 높은 상태값에 따라 진화 형태 결정
