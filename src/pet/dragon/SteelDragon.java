@@ -1,4 +1,6 @@
-package pet;
+package pet.dragon;
+
+import pet.Pet;
 
 // 체력이 가장 높을 때 진화하는 드래곤
 public class SteelDragon extends Dragon{

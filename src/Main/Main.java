@@ -1,7 +1,7 @@
 package Main;
 
 import game.GameManager;
-import pet.Dragon;
+import pet.dragon.Dragon;
 import pet.dog.Dog;
 import pet.Pet;
 
