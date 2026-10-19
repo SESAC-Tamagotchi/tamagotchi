@@ -1,6 +1,7 @@
 package game;
 
 import pet.Pet;
+import pet.egg.Egg;
 
 import java.util.Scanner;
 
@@ -34,6 +35,12 @@ public class GameManager {
                 pet = evolved;
                 pet.showHappyImage();
                 pet.makeSound();
+            }
+
+            // 알이 부화하지 못하면 엔딩
+            if(pet instanceof Egg && ((Egg) pet).isHatchFailed()){
+                System.out.println("게임을 종료합니다.");
+                return;
             }
 
             pet.getInfo();
